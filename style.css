@@ -20,3 +20,60 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 @media(max-height:500px){.home-card{transform:scale(.9)}.profile-card{padding-top:12px;padding-bottom:12px}.avatar-choice{min-height:130px;padding:4px}.avatar-preview{height:88px;width:75px}.intro-card{padding:14px}.mascot-orb{font-size:2.5rem}.intro-card h2{font-size:1.45rem;margin:3px}.intro-card p{margin:6px}.result-card{padding:12px}.result-burst{font-size:2.5rem}.result-card h2{font-size:1.45rem}.score-hero strong{font-size:2rem}.leaderboard-panel{padding:12px}}
 @media(orientation:portrait) and (max-width:900px){.rotate-notice{display:flex}.screen{visibility:hidden}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+/* Fix telefon landskap */
+@supports (height:100dvh){
+  html,body,.app-shell{
+    height:100dvh;
+  }
+}
+
+@media (orientation:landscape) and (max-height:700px){
+  .profile-screen{
+    overflow-y:auto;
+    align-items:flex-start;
+    padding:8px 10px 24px;
+  }
+
+  .profile-card{
+    margin:auto;
+    padding:10px 18px;
+  }
+
+  .profile-card h2{
+    font-size:1.5rem;
+    margin:2px 0 5px;
+  }
+
+  .field-label{
+    margin:5px 0 4px;
+  }
+
+  .name-input{
+    padding:8px 10px;
+  }
+
+  .avatar-grid{
+    gap:8px;
+    margin-bottom:6px;
+  }
+
+  .avatar-choice{
+    min-height:108px;
+    padding:3px;
+  }
+
+  .avatar-preview{
+    width:62px;
+    height:74px;
+  }
+
+  .form-error{
+    min-height:10px;
+    margin-bottom:2px;
+  }
+
+  .profile-card .btn-xl{
+    min-height:42px;
+    padding:8px 12px;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name":"Misi 14 Nilai: Sehari di SK Tanjung Bunga",
+  "short_name":"Misi 14 Nilai",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#dff4ff",
+  "theme_color":"#1565c0",
+  "orientation":"landscape",
+  "icons":[
+    {"src":"assets/icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"assets/icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

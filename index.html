@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#1565c0" />
+  <meta name="description" content="Misi 14 Nilai: Sehari di SK Tanjung Bunga" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/icon-192.png" />
+  <title>Misi 14 Nilai: Sehari di SK Tanjung Bunga</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <div id="rotateNotice" class="rotate-notice" aria-hidden="true">
+      <div class="rotate-card">
+        <div class="rotate-icon">📱↻</div>
+        <strong>Pusingkan peranti</strong>
+        <span>Game ini paling seronok dimainkan secara landskap.</span>
+      </div>
+    </div>
+
+    <section id="screen-home" class="screen active home-screen" aria-label="Skrin permulaan">
+      <div class="home-backdrop"></div>
+      <div class="home-card glass-card">
+        <img class="school-logo" src="assets/logo-sktb.jpg" alt="Logo Sekolah Kebangsaan Tanjung Bunga" />
+        <div class="title-badge">Pendidikan Moral Tahun 3</div>
+        <h1>Misi 14 Nilai</h1>
+        <h2>Sehari di SK Tanjung Bunga</h2>
+        <p class="tagline">Jelajah sekolah, bantu rakan dan lengkapkan semua 14 nilai murni.</p>
+        <div class="home-actions">
+          <button id="btnStart" class="btn btn-primary btn-xl"><span>▶</span> Mula</button>
+          <button id="btnContinue" class="btn btn-success btn-xl hidden"><span>↻</span> Sambung</button>
+          <div class="two-col">
+            <button id="btnHow" class="btn btn-secondary"><span>📖</span> Cara Main</button>
+            <button id="btnLeaderboard" class="btn btn-warning"><span>🏆</span> Leaderboard</button>
+          </div>
+        </div>
+        <div class="home-mini">🎮 2 Avatar &nbsp; • &nbsp; 🌱 14 Nilai &nbsp; • &nbsp; 📱 Mesra Telefon & Tablet</div>
+      </div>
+      <button id="btnHomeAudio" class="floating-audio" aria-label="Muzik hidup">🔊</button>
+    </section>
+
+    <section id="screen-profile" class="screen profile-screen" aria-label="Nama dan avatar">
+      <div class="profile-card glass-card">
+        <button class="icon-back" data-go="home" aria-label="Kembali">←</button>
+        <div class="section-kicker">LANGKAH 1</div>
+        <h2>Siapa Anda?</h2>
+        <label class="field-label" for="playerName">Masukkan nama</label>
+        <input id="playerName" class="name-input" maxlength="12" autocomplete="off" placeholder="Contoh: Aina" />
+        <div class="field-label avatar-label">Pilih avatar</div>
+        <div class="avatar-grid" role="radiogroup" aria-label="Pilih avatar">
+          <button class="avatar-choice" data-avatar="boy" role="radio" aria-checked="false">
+            <canvas class="avatar-preview" width="110" height="130" data-preview="boy"></canvas>
+            <span class="avatar-name">Lelaki</span>
+            <small>Uniform sekolah</small>
+          </button>
+          <button class="avatar-choice" data-avatar="girl" role="radio" aria-checked="false">
+            <canvas class="avatar-preview" width="110" height="130" data-preview="girl"></canvas>
+            <span class="avatar-name">Perempuan</span>
+            <small>Uniform sekolah</small>
+          </button>
+        </div>
+        <div id="profileError" class="form-error" role="alert"></div>
+        <button id="btnBeginMission" class="btn btn-primary btn-xl full">Mula Misi 🚀</button>
+      </div>
+    </section>
+
+    <section id="screen-intro" class="screen intro-screen" aria-label="Pengenalan misi">
+      <div class="intro-card glass-card">
+        <div class="mascot-orb">🌱</div>
+        <div class="section-kicker">MISI HARI INI</div>
+        <h2 id="introGreeting">Selamat datang!</h2>
+        <p>Lengkapkan <strong>14 nilai moral</strong> di sekitar sekolah. Setiap misi memberi markah, bintang dan peluang membina streak.</p>
+        <div class="intro-rules">
+          <div><strong>⭐ 100</strong><span>Markah asas setiap nilai</span></div>
+          <div><strong>🔥 +Bonus</strong><span>Cubaan pertama & streak</span></div>
+          <div><strong>🏆 2500</strong><span>Skor maksimum</span></div>
+        </div>
+        <button id="btnEnterSchool" class="btn btn-success btn-xl full">Masuk Sekolah →</button>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen game-screen" aria-label="Permainan utama">
+      <header class="hud">
+        <div class="hud-player">
+          <canvas id="hudAvatar" width="46" height="52"></canvas>
+          <div class="hud-player-text"><strong id="hudName">Pemain</strong><span id="hudLocation">Pagar Masuk</span></div>
+        </div>
+        <div class="hud-chip"><span>⭐</span><div><small>SKOR</small><strong id="hudScore">0</strong></div></div>
+        <div class="hud-chip"><span>🌱</span><div><small>NILAI</small><strong id="hudValues">0/14</strong></div></div>
+        <div class="hud-chip streak-chip"><span>🔥</span><div><small>STREAK</small><strong id="hudStreak">0</strong></div></div>
+        <div class="hud-spacer"></div>
+        <button id="btnAudio" class="hud-icon" aria-label="Audio">🔊</button>
+        <button id="btnPause" class="hud-icon" aria-label="Jeda">⏸</button>
+      </header>
+
+      <div id="gameStage" class="game-stage">
+        <canvas id="gameCanvas" width="960" height="540" aria-label="Peta permainan"></canvas>
+        <div id="toast" class="toast" aria-live="polite"></div>
+        <div class="quest-card">
+          <div class="quest-icon">!</div>
+          <div><small>MISI SEMASA</small><strong id="questTitle">Cari misi pertama</strong><span id="questHint">Pergi ke lokasi bertanda !</span></div>
+        </div>
+
+        <div class="dpad" aria-label="Kawalan pergerakan">
+          <button data-move="up" aria-label="Atas">▲</button>
+          <button data-move="left" aria-label="Kiri">◀</button>
+          <button data-move="down" aria-label="Bawah">▼</button>
+          <button data-move="right" aria-label="Kanan">▶</button>
+        </div>
+        <button id="btnInteract" class="interact-btn"><span>💬</span> Interaksi</button>
+      </div>
+    </section>
+
+    <section id="screen-result" class="screen result-screen" aria-label="Keputusan permainan">
+      <div class="result-wrap">
+        <div class="result-card glass-card">
+          <div class="result-burst">🏆</div>
+          <div class="section-kicker">MISI SELESAI</div>
+          <h2 id="resultTitle">Tahniah!</h2>
+          <p id="resultSubtitle">Anda telah melengkapkan semua 14 nilai.</p>
+          <div class="score-hero"><small>SKOR AKHIR</small><strong id="resultScore">0</strong><span>/ 2500</span></div>
+          <div class="result-stats">
+            <div><span>🌱</span><strong>14/14</strong><small>Nilai</small></div>
+            <div><span>⏱</span><strong id="resultTime">00:00</strong><small>Masa</small></div>
+            <div><span>⭐</span><strong id="resultStars">0</strong><small>Bintang</small></div>
+          </div>
+          <div id="resultRank" class="rank-badge">🏅 Wira Nilai</div>
+          <div id="newRecord" class="new-record hidden">✨ Rekod Baharu!</div>
+          <div class="result-actions">
+            <button id="btnPlayAgain" class="btn btn-primary">↻ Main Lagi</button>
+            <button id="btnResultLeaderboard" class="btn btn-warning">🏆 Leaderboard</button>
+            <button id="btnResultHome" class="btn btn-secondary">⌂ Utama</button>
+          </div>
+        </div>
+        <div class="leaderboard-panel">
+          <h3>🏆 Top 5 Peranti Ini</h3>
+          <div id="resultLeaderboardList" class="leaderboard-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div id="modalCard" class="modal-card">
+        <button id="modalClose" class="modal-close" aria-label="Tutup">×</button>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <div id="pauseOverlay" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-card pause-card">
+        <div class="pause-icon">⏸</div>
+        <h2>Permainan Dijeda</h2>
+        <p>Kemajuan anda disimpan secara automatik.</p>
+        <button id="btnResume" class="btn btn-success full">▶ Sambung</button>
+        <button id="btnPauseAudio" class="btn btn-secondary full">🔊 Muzik & Bunyi</button>
+        <button id="btnQuitHome" class="btn btn-danger full">⌂ Kembali ke Utama</button>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

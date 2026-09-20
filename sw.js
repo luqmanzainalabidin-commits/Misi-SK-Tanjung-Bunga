@@ -1,4 +1,4 @@
-const CACHE='misi14-v1.2.0';
+const CACHE='misi14-v1.3.0';
 const ASSETS=[
   './','./index.html','./style.css','./game.js','./manifest.json',
   './assets/map-sekolah.png','./assets/logo-sktb.jpg','./assets/icon-192.png','./assets/icon-512.png',
